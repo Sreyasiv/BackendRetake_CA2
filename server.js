@@ -14,7 +14,7 @@ mongoose.connect(process.env.MONGO_URI)
     .then(()=>console.log('MongoDB connected'))
     .catch(()=>console.log('Error in connecting to DB'))
 
-app.post('/post',async(req,res)=>{
+app.post('/signup',async(req,res)=>{
 
     try{
        const{username,email,password,dob}=req.body
@@ -31,8 +31,8 @@ app.post('/post',async(req,res)=>{
     if(password.length<8 || password.length>16){
         return res.status(400).json({message:"The password length should be lesser than or equal to 16 and more than 8"})
     }
-
-    await User.save()
+    const newUser=new User(req.body)
+    await newUser.save()
     return res.status(201).json({message:"User registed",user:newUser})
     }
 
