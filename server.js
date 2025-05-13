@@ -32,7 +32,7 @@ app.post('/post',async(req,res)=>{
         return res.status(400).json({message:"The password length should be lesser than or equal to 16 and more than 8"})
     }
 
-    await User.req.body.save()
+    await User.save()
     return res.status(201).json({message:"User registed",user:newUser})
     }
 
